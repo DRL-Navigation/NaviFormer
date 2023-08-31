@@ -1,0 +1,8 @@
+build
+devel
+.catkin_workspace
+.idea
+**/__pycache__
+testing/output/
+
+

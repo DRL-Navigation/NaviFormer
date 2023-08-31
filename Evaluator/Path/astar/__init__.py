@@ -1,0 +1,1 @@
+from astar.prm_astar import get_global_path

@@ -1,0 +1,243 @@
+<?xml version="1.0" ?>
+<!--
+  This is not a standalone urdf for zeromess_z1. It simply defines the 'zeromess_z1' tag that can
+  be incorporated by other urdf files (e.g. turtlebot).
+
+  See zeromess_z1_standalone.urdf.xacro for a standalone urdf to be tested with
+      nav_launch/launch/view_model.launch
+ -->
+<robot name="zeromess_z1" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find zeromess_simulations)/urdf/common_properties.urdf.xacro"/>
+  <xacro:include filename="$(find zeromess_simulations)/urdf/zeromess_z1_gazebo.urdf.xacro"/>
+
+  <!-- zeromess_z1 -->
+  <xacro:macro name="zeromess_z1">
+    <link name="base_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://zeromess_simulations/meshes/main_body.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <material name="dark_grey"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.06" radius="0.15"/>
+        </geometry>
+        <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      </collision>
+      <inertial>
+        <origin xyz="0.01 0 0"/>
+        <mass value="2.4"/>
+        <inertia ixx="0.019995" ixy="0.0" ixz="0.0"
+                 iyy="0.019995" iyz="0.0"
+                 izz="0.03675" />
+      </inertial>
+    </link>
+
+    <joint name="wheel_left_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="wheel_left_link"/>
+      <origin xyz="0.00 ${0.235/2} 0.0250" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+    </joint>
+    <link name="wheel_left_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://zeromess_simulations/meshes/wheel.dae"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="${M_PI_2} 0 0"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.0206" radius="0.035"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="${M_PI_2} 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0"
+                 izz="0.001" />
+      </inertial>
+    </link>
+
+    <joint name="wheel_right_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="wheel_right_link"/>
+      <origin xyz="0.00 -${0.235/2} 0.0250" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+    </joint>
+    <link name="wheel_right_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://zeromess_simulations/meshes/wheel.dae"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="${M_PI_2} 0 0"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.0206" radius="0.035"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="${M_PI_2} 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0"
+                 izz="0.001" />
+      </inertial>
+    </link>
+
+    <joint name="caster_back_right_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="caster_back_right_link"/>
+      <origin xyz="-0.11 -${0.18/2} 0" rpy="${M_PI_2} 0 0"/>
+    </joint>
+    <link name="caster_back_right_link">
+      <collision>
+        <geometry>
+          <cylinder length="0.0176" radius="0.01"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0"
+                 izz="0.001" />
+      </inertial>
+    </link>
+
+    <joint name="caster_back_left_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="caster_back_left_link"/>
+      <origin xyz="-0.11 ${0.18/2} 0" rpy="${M_PI_2} 0 0"/>
+    </joint>
+    <link name="caster_back_left_link">
+      <collision>
+        <geometry>
+          <cylinder length="0.0176" radius="0.01"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0"
+                 izz="0.001" />
+      </inertial>
+    </link>
+
+    <joint name="caster_front_right_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="caster_front_right_link"/>
+      <origin xyz="0.08 -${0.15/2} 0" rpy="${M_PI_2} 0 0"/>
+    </joint>
+    <link name="caster_front_right_link">
+      <collision>
+        <geometry>
+          <cylinder length="0.0176" radius="0.01"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0"
+                 izz="0.001" />
+      </inertial>
+    </link>
+
+    <joint name="caster_front_left_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="caster_front_left_link"/>
+      <origin xyz="0.08 ${0.15/2} 0" rpy="${M_PI_2} 0 0"/>
+    </joint>
+    <link name="caster_front_left_link">
+      <collision>
+        <geometry>
+          <cylinder length="0.0176" radius="0.01"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0"
+                 izz="0.001" />
+      </inertial>
+    </link>
+
+    <!-- zeromess_z1's sensors -->
+    <joint name="imu_joint" type="fixed">
+      <axis xyz="0 1 0"/>
+      <origin xyz="0.08 0 0" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="base_imu"/>
+    </joint>
+    <link name="base_imu">
+      <inertial>
+        <mass value="0.001"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.0001" ixy="0" ixz="0"
+                 iyy="0.000001" iyz="0"
+                 izz="0.0001"/>
+      </inertial>
+    </link>
+
+    <!-- <joint name="cliff_sensor_right_joint" type="fixed">
+      <origin xyz="0.11 -${0.29/2} 0" rpy="0 ${M_PI_2} 0" />
+      <parent link="base_link"/>
+      <child link="cliff_sensor_right_link" />
+    </joint>
+    <link name="cliff_sensor_right_link">
+      <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0"
+                 izz="0.0001" />
+      </inertial>
+    </link>
+
+    <joint name="cliff_sensor_left_joint" type="fixed">
+      <origin xyz="0.11 ${0.29/2} 0" rpy="0 ${M_PI_2} 0" />
+      <parent link="base_link"/>
+      <child link="cliff_sensor_left_link" />
+    </joint>
+    <link name="cliff_sensor_left_link">
+      <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0"
+                 izz="0.0001" />
+      </inertial>
+    </link> -->
+
+    <joint name="laser_joint" type="fixed">
+      <origin xyz="0 0 0.166" rpy="0 0 0" />
+      <parent link="base_link"/>
+      <child link="front_lidar" />
+    </joint>
+    <link name="front_lidar">
+      <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.0001" ixy="0.0" ixz="0.0"
+                 iyy="0.0001" iyz="0.0"
+                 izz="0.0001" />
+      </inertial>
+    </link>
+
+    <xacro:zeromess_z1_sim/>
+
+  </xacro:macro>
+</robot>
